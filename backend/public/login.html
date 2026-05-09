@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reward Platform</title>
+
+<style>
+body{
+font-family: Arial, Helvetica, sans-serif;
+background: linear-gradient(135deg,#0f172a,#020617);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.container{
+background:#0b1220;
+padding:40px;
+border-radius:15px;
+width:350px;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border-radius:8px;
+border:none;
+background:#020617;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#3b82f6;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Login</h2>
+
+<input id="loginEmail" placeholder="Email">
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<hr>
+
+<h2>Registro</h2>
+
+<input id="username" placeholder="Username">
+<input id="email" placeholder="Email">
+<input id="phone" placeholder="Phone">
+
+<div style="display:flex;gap:5px">
+<input id="code" placeholder="SMS Code">
+<button onclick="sendCode()">Send</button>
+</div>
+
+<button onclick="verify()">Verify phone</button>
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Create account</button>
+
+</div>
+
+<script>
+const API = "http://localhost:3000/api";
+
+let phoneVerified = false;
+
+
+// LOGIN
+async function login(){
+
+const res = await fetch(API + "/auth/login",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify({
+email: loginEmail.value,
+password: loginPassword.value
+})
+});
+
+const data = await res.json();
+
+if(!res.ok){
+alert(data.message);
+return;
+}
+
+localStorage.setItem("token",data.token);
+
+window.location.href="dashboard.html";
+}
+
+
+
+// SEND CODE
+async function sendCode(){
+
+if(!phone.value){
+alert("Enter phone first");
+return;
+}
+
+await fetch(API+"/auth/send-code",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body:JSON.stringify({
+phone: phone.value
+})
+});
+
+alert("Code sent (check backend console)");
+
+}
+
+
+
+// VERIFY PHONE
+async function verify(){
+
+const res = await fetch(API+"/auth/verify-code",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body:JSON.stringify({
+phone: phone.value,
+code: code.value
+})
+});
+
+const data = await res.json();
+
+if(!res.ok){
+alert(data.message);
+return;
+}
+
+phoneVerified = true;
+
+alert("Phone verified");
+
+}
+
+
+
+// REGISTER
+async function register(){
+
+if(!phoneVerified){
+alert("You must verify phone first");
+return;
+}
+
+const result = await pool.query(
+  `INSERT INTO users
+   (id, username, email, phone, password_hash, referral_code, phone_verified)
+   VALUES ($1,$2,$3,$4,$5,$6,true)
+   RETURNING id, username, email, phone, phone_verified`,
+  [id, username, email, phone, hashedPassword, referralCode]
+);
+const res = await fetch(API+"/auth/register",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body:JSON.stringify({
+username: username.value,
+email: email.value,
+phone: phone.value,
+password: password.value
+})
+});
+
+const data = await res.json();
+
+if(!res.ok){
+alert(data.message);
+return;
+}
+
+alert("Account created");
+
+}
+</script>
+
+</body>
+</html>

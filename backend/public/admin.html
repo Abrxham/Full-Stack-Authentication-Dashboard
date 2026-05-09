@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+</head>
+<body>
+
+<h2>Admin Panel</h2>
+
+<button onclick="logout()">Logout</button>
+
+<h3>Withdrawals</h3>
+
+<button onclick="loadWithdrawals()">Refresh</button>
+
+<ul id="withdrawals"></ul>
+
+<script>
+
+const API = "http://localhost:3000/api";
+const token = localStorage.getItem("token");
+
+if(!token){
+window.location.href = "login.html";
+}
+
+async function loadWithdrawals(){
+
+const res = await fetch(API + "/admin/withdrawals",{
+headers:{
+Authorization:"Bearer " + token
+}
+});
+
+const data = await res.json();
+
+const list = document.getElementById("withdrawals");
+
+list.innerHTML = "";
+
+data.forEach(w=>{
+
+const li = document.createElement("li");
+
+li.innerHTML = `
+User: ${w.email}
+Amount: ${w.amount}
+Wallet: ${w.wallet_address}
+Status: ${w.status}
+
+<button onclick="approve('${w.id}')">Approve</button>
+<button onclick="reject('${w.id}')">Reject</button>
+
+<hr>
+`;
+
+list.appendChild(li);
+
+});
+
+}
+
+async function approve(id){
+
+await fetch(API + "/admin/withdrawals/approve",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer " + token
+},
+body: JSON.stringify({ withdrawalId: id })
+});
+
+loadWithdrawals();
+
+}
+
+async function reject(id){
+
+await fetch(API + "/admin/withdrawals/reject",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer " + token
+},
+body: JSON.stringify({ withdrawalId: id })
+});
+
+loadWithdrawals();
+
+}
+
+function logout(){
+localStorage.removeItem("token");
+window.location.href="login.html";
+}
+
+loadWithdrawals();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#020617;
+color:white;
+margin:0;
+}
+
+.topbar{
+background:#0f172a;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+.container{
+padding:20px;
+}
+
+.card{
+background:#0f172a;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+button{
+background:#3b82f6;
+border:none;
+padding:10px 15px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+input{
+padding:10px;
+border-radius:6px;
+border:none;
+background:#020617;
+color:white;
+}
+
+.task{
+background:#020617;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+<div>Reward Dashboard</div>
+<button onclick="logout()">Logout</button>
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Balance</h3>
+<h1 id="coins">0</h1>
+</div>
+
+<div class="card">
+<h3>Tareas</h3>
+<button onclick="getTasks()">Cargar</button>
+<div id="tasks"></div>
+</div>
+
+<div class="card">
+<h3>Retiro</h3>
+
+<input id="amount" placeholder="Amount">
+<input id="wallet" placeholder="TRC20 wallet">
+
+<br><br>
+
+<button onclick="withdraw()">Solicitar retiro</button>
+
+</div>
+
+</div>
+
+<script>
+
+const API = "http://localhost:3000/api";
+const token = localStorage.getItem("token");
+
+let sessionToken="";
+
+if(!token) location.href="login.html";
+
+getProfile();
+
+async function getProfile(){
+
+const res = await fetch(API+"/user/profile",{
+headers:{Authorization:"Bearer "+token}
+});
+
+const data = await res.json();
+
+coins.innerText=data.coins;
+
+}
+
+async function getTasks(){
+
+const res = await fetch(API+"/tasks",{
+headers:{Authorization:"Bearer "+token}
+});
+
+const data = await res.json();
+
+tasks.innerHTML="";
+
+data.forEach(t=>{
+
+tasks.innerHTML+=`
+<div class="task">
+${t.title} - ${t.reward} coins
+<br><br>
+<button onclick="startTask(${t.id})">Start</button>
+</div>
+`;
+
+});
+
+}
+
+async function startTask(id){
+
+const res = await fetch(API+"/tasks/start",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer "+token
+},
+body:JSON.stringify({taskId:id})
+});
+
+const data = await res.json();
+
+sessionToken=data.sessionToken;
+
+alert("Task started");
+
+}
+
+async function completeTask(){
+
+await fetch(API+"/tasks/complete",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer "+token
+},
+body:JSON.stringify({sessionToken})
+});
+
+getProfile();
+
+}
+
+async function withdraw(){
+
+await fetch(API+"/withdrawals/request",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+Authorization:"Bearer "+token
+},
+body:JSON.stringify({
+amount:amount.value,
+wallet:wallet.value
+})
+});
+
+alert("Solicitud enviada");
+
+}
+
+function logout(){
+localStorage.removeItem("token");
+location.href="login.html";
+}
+
+</script>
+
+<button onclick="completeTask()" style="position:fixed;bottom:20px;right:20px;">
+Complete task
+</button>
+
+</body>
+</html>
