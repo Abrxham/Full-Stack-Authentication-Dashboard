@@ -7,3 +7,10 @@ In this section, new users can create their credentials to access the website. A
 
 Dashboard page:
 <img width="1920" height="977" alt="image" src="https://github.com/user-attachments/assets/7e278796-9aec-4556-979d-120e4a62b35b" />
+In this section, users can view their available balance, acquire new tasks, complete tasks, and make withdrawals to a USTD wallet of their choice. The minimum withdrawal is 15 USDT (This value can be modified at will by an authorized administrator).
+
+Administrator Page (Base): 
+<img width="1920" height="633" alt="image" src="https://github.com/user-attachments/assets/61c4534f-a33a-48fc-b6c4-c26ebbf2178a" />
+In this section, authorized administrators can view all transactions from various users. The administrator can see the username, the requested withdrawal amount, the wallet address, and the transaction status, which can be one of three states: "Approved," "Pending," or "Rejected." These statuses are reflected in the user's dashboard.
+
+
