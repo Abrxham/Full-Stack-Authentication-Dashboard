@@ -3,6 +3,7 @@ This is my project in base for a website that rewards users for viewing ads, log
 
 Home login and registration page:
 <img width="1892" height="958" alt="Captura de pantalla 2026-05-09 210825" src="https://github.com/user-attachments/assets/7490b111-f4ac-472f-b9bc-f9c9e566654c" />
+In this section, new users can create their credentials to access the website. A phone number is required to receive a security SMS code to prevent the widespread use of bots and multiple accounts, and also to more effectively identify a user's account.
 
 Dashboard page:
 <img width="1920" height="977" alt="image" src="https://github.com/user-attachments/assets/7e278796-9aec-4556-979d-120e4a62b35b" />
