@@ -21,11 +21,13 @@ In this section, authorized administrators can view all transactions from variou
 
 -Express.js
 
+
 🔹Database:
 
 -PostgreSQL
 
 -pgAdmin
+
 
 🔹Autenticación y Seguridad:
 
@@ -41,43 +43,70 @@ In this section, authorized administrators can view all transactions from variou
 
 -Rate limiting (planeado / opcional)
 
+
 🔹Frontend:
 
 -HTML5
+
 -CSS3
+
 -JavaScript Vanilla (sin framework)
+
 
 🔹Comunicación API:
 
 -REST API
+
 -JSON
+
 
 🔹Herramientas de Desarrollo:
 
 -Nodemon
+
 -Visual Studio Code
+
 -GitHub
+
 
 🔹Funcionalidades Implementadas:
 
 -Sistema de usuarios
+
 -Registro y login
+
 -Verificación por SMS
+
 -Sistema de tareas/recompensas
+
 -Temporizador anti-trampa
+
 -Sistema de retiros
+
 -Panel administrativo
+
 -Protección contra tareas repetidas
+
 -Límite diario de tareas
+
 -Sistema de balances virtuales (coins)
 
+
+
 🔹Tecnologías Planeadas:
+
 -API de SMS real (ej: Twilio)
+
 -Integración USDT/TRC20
+
 -Sistema de referidos
+
 -Sistema anti-fraude avanzado
+
 -Dashboard avanzado
+
 -Automatización de retiros
+
 -Detección de bots y multi-cuentas
 
 
