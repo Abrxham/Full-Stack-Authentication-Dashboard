@@ -16,14 +16,17 @@ In this section, authorized administrators can view all transactions from variou
 Tecnologías utilizadas:
 
 Backend:
+
 -Node.js
 -Express.js
 
 Database:
+
 -PostgreSQL
 -pgAdmin
 
 Autenticación y Seguridad:
+
 -JWT
 -bcrypt
 -Middleware de autenticación personalizado
@@ -32,20 +35,24 @@ Autenticación y Seguridad:
 -Rate limiting (planeado / opcional)
 
 Frontend:
+
 -HTML5
 -CSS3
 -JavaScript Vanilla (sin framework)
 
 Comunicación API:
+
 -REST API
 -JSON
 
 Herramientas de Desarrollo:
+
 -Nodemon
 -Visual Studio Code
 -GitHub
 
 Funcionalidades Implementadas:
+
 -Sistema de usuarios
 -Registro y login
 -Verificación por SMS
