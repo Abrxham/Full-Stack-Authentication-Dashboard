@@ -18,20 +18,27 @@ In this section, authorized administrators can view all transactions from variou
 🔹Backend:
 
 -Node.js
+
 -Express.js
 
 🔹Database:
 
 -PostgreSQL
+
 -pgAdmin
 
 🔹Autenticación y Seguridad:
 
 -JWT
+
 -bcrypt
+
 -Middleware de autenticación personalizado
+
 -Sistema de verificación SMS
+
 -Protección anti-fraude básica
+
 -Rate limiting (planeado / opcional)
 
 🔹Frontend:
