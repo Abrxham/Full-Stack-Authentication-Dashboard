@@ -13,19 +13,19 @@ Administrator Page (Base):
 <img width="1920" height="633" alt="image" src="https://github.com/user-attachments/assets/61c4534f-a33a-48fc-b6c4-c26ebbf2178a" />
 In this section, authorized administrators can view all transactions from various users. The administrator can see the username, the requested withdrawal amount, the wallet address, and the transaction status which can be one of three states: "Approved," "Pending," or "Rejected." These statuses are reflected in the user's dashboard.
 
-Tecnologías utilizadas:
+||Tecnologías utilizadas:||
 
-Backend:
+🔹Backend:
 
 -Node.js
 -Express.js
 
-Database:
+🔹Database:
 
 -PostgreSQL
 -pgAdmin
 
-Autenticación y Seguridad:
+🔹Autenticación y Seguridad:
 
 -JWT
 -bcrypt
@@ -34,24 +34,24 @@ Autenticación y Seguridad:
 -Protección anti-fraude básica
 -Rate limiting (planeado / opcional)
 
-Frontend:
+🔹Frontend:
 
 -HTML5
 -CSS3
 -JavaScript Vanilla (sin framework)
 
-Comunicación API:
+🔹Comunicación API:
 
 -REST API
 -JSON
 
-Herramientas de Desarrollo:
+🔹Herramientas de Desarrollo:
 
 -Nodemon
 -Visual Studio Code
 -GitHub
 
-Funcionalidades Implementadas:
+🔹Funcionalidades Implementadas:
 
 -Sistema de usuarios
 -Registro y login
@@ -64,7 +64,7 @@ Funcionalidades Implementadas:
 -Límite diario de tareas
 -Sistema de balances virtuales (coins)
 
-Tecnologías Planeadas:
+🔹Tecnologías Planeadas:
 -API de SMS real (ej: Twilio)
 -Integración USDT/TRC20
 -Sistema de referidos
